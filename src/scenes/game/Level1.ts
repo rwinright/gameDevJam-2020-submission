@@ -53,6 +53,9 @@ export default class Level1 extends Scene {
     //Set player collision with platforms.
     this.physics.add.collider(this.player1, this.collisionLayers);
     
+    
+
+    this.cameras.main.startFollow(this.player1, false, 0.1, 0.5, 0, 0); //Follow the player
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels); //force camera bounds from config file
   }
 

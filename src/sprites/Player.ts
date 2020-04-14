@@ -99,9 +99,6 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
       frameRate: 1,
       repeat: -1
     });
-
-    this.scene.cameras.main.startFollow(this, false, 0.1, 0.5, 0, 0);
-    this.scene.cameras.main.setBounds(0, 0, 1280, 940); //force camera bounds from config file
   }
 
   update(keys: any) {
