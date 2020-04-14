@@ -54,9 +54,11 @@ export default class Level1 extends Scene {
     this.physics.add.collider(this.player1, this.collisionLayers);
     
     
+    //force camera bounds from the map width/height and follow the player
+    this.cameras.main
+      .startFollow(this.player1, false, 0.1, 0.5, 0, 0)
+      .setBounds(0, 0, map.widthInPixels, map.heightInPixels);; //Follow the player
 
-    this.cameras.main.startFollow(this.player1, false, 0.1, 0.5, 0, 0); //Follow the player
-    this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels); //force camera bounds from config file
   }
 
   public update() {
