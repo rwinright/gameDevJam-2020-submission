@@ -1,19 +1,14 @@
+
+//State management for scene keys
 export const CST = {
   SCENES: {
-    UI:{
+    UI: {
       BOOT: "BOOT",
-      LOAD: "LOAD",
-      MENU: "MENU",
-      PLAY: "PLAY",
-      PAUSE: "PAUSE"
+      PRELOAD: "PRELOAD",
+      TITLE: "TITLE"
     },
-    LEVELS: {
-      START_AREA: {
-        ROOM_1: "SA_ROOM_1"
-      },
-      AREA_2: {
-        A2_ROOM_1: "A2_ROOM_1"
-      }
+    GAME: {
+      LEVEL1: "LEVEL1"
     }
   }
 }

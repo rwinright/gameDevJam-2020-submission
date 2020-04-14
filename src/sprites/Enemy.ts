@@ -1,6 +1,3 @@
-import Bullet from "./Bullet";
-import { GetRandom } from "../Helpers";
-
 export default class Enemy extends Phaser.Physics.Arcade.Sprite {
 
     constructor(scene: any, x: number, y: number, texture: any) {

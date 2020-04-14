@@ -1,9 +1,6 @@
-import Bullet from "./Bullet";
-import { GetRandom } from "../Helpers";
-
 export default class Player extends Phaser.Physics.Arcade.Sprite {
-  ammo: number;
-
+  ammo: number
+  
   constructor(scene: any, x: number, y: number, texture: any) {
     super(scene, x, y, texture);
 
@@ -27,7 +24,6 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
   private bulletGroup: any;
   private bulletTime: number = 0;
 
-  private shoot = false;
   private shootTimer = 0;
 
 
@@ -116,8 +112,6 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     //movement/jumping
     this.direction = (keys.D.isDown - keys.A.isDown);
 
-    // console.log(keys.SPACE.isDown)
-
     this.flipX = !this.facingRight;
 
     this.setVelocityX(this.direction * 120);
@@ -176,30 +170,23 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
       let speed = 1000;
       this.ammo--;
-      this.shoot = true;
 
       //console.log(this.ammo);
       if (this.facingUp) {
         b.setVelocityY(-speed);
         b.setRotation(90);
-
-        b.x += GetRandom(-10, 10);
       }
       else if (this.facingRight) {
         b.setVelocityX(speed);
         b.flipX = true;
         b.x += 20;
-        b.y += GetRandom(-10, 10);
       }
       else {
         b.setVelocityX(-speed);
         b.x -= 20;
-        b.y += GetRandom(-10, 10);
       }
     }
-    // if (this.shoot && !keys.E.isDown) {
-    //   this.shoot = false;
-    // }
+
     //Aiming
     if (keys.W.isDown) {
       this.facingUp = true;
