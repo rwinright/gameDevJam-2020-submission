@@ -5,8 +5,8 @@ import Level1 from "../scenes/game/Level1"
 
 //Register scenes here
 export default [
-    BootScene,
-    LoadScene,
-    MenuScene,
+  BootScene,
+  LoadScene,
+  MenuScene,
   Level1
 ]
