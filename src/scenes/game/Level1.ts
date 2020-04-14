@@ -22,18 +22,18 @@ export default class Level1 extends Scene {
   }
 
   public create() {
+    //Probably going to extract all this to the "helper function"
     const map = this.make.tilemap({ key: 'level1Map' });
     const bgTiles = map.addTilesetImage("cave background", 'caveBG');
     const tiles = map.addTilesetImage("cave tileset", 'cave');
     
-    // const platforms = map.createStaticLayer('Platforms', tiles, 0, 200).setCollisionByExclusion([-1]);
-    
+    //Set the names of the layers in the json file.
     const layerNames = ["Platforms"];
     
     //Since backgrounds are usually dynamic, this layer is created separately. 
     map.createStaticLayer('Background', bgTiles, 0, 200);
     //This needs some hardcore refactoring
-    layerNames.forEach((layerName: any) => {
+    layerNames.forEach((layerName: string) => {
       if(layerName === "Platforms"){ //Layernames that need collisions
         //Temporary variable for the collision layer;
         let colLayer = map.createStaticLayer(layerName, tiles, 0, 200).setCollisionByExclusion([-1]);
@@ -52,7 +52,8 @@ export default class Level1 extends Scene {
 
     //Set player collision with platforms.
     this.physics.add.collider(this.player1, this.collisionLayers);
-
+    
+    this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels); //force camera bounds from config file
   }
 
   public update() {

@@ -28,6 +28,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
 
   create() {
+    
     //Bullet frames and stuff
     this.bulletGroup = this.scene.physics.add.group({ runChildUpdate: true });
 
@@ -44,6 +45,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
     //Generate character frames
     //TODO: Place into separate file for reuse?
+    // This will all be different too.
     let idleFrames = this.scene.anims.generateFrameNames(this.texture.key, {
       start: 0, end: 5, zeroPad: 4, prefix: 'idle/', suffix: '.png'
     });
@@ -62,6 +64,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
     //Create player animations
     //TODO: Place into another file for reuse?
+    //This will go to the helper function
     this.scene.anims.create({
       key: 'idle',
       frames: idleFrames,
@@ -97,10 +100,8 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
       repeat: -1
     });
 
-    // this.add.collider(this, platforms);
-
     this.scene.cameras.main.startFollow(this, false, 0.1, 0.5, 0, 0);
-    this.scene.cameras.main.setBounds(0, 0, 1280, 940);
+    this.scene.cameras.main.setBounds(0, 0, 1280, 940); //force camera bounds from config file
   }
 
   update(keys: any) {
