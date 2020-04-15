@@ -1,4 +1,5 @@
 export default class Enemy extends Phaser.Physics.Arcade.Sprite {
+    facingRight: boolean = true;
 
     constructor(scene: any, x: number, y: number, texture: any) {
         super(scene, x, y, texture);
@@ -16,7 +17,9 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
 
 
     }
-
+    reverseDirection() {
+        this.facingRight = !this.facingRight;
+    }
     private enemyGroup: any;
 
 }
