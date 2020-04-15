@@ -51,7 +51,7 @@ export default class Level1 extends Scene {
       }
     });
 
-    this.enemy1 = new Walker(this, 100, 500, 'player1');
+    this.enemy1 = new Flyer(this, 100, 500, 'player1');
     //this.enemy1.create();
     this.physics.add.collider(this.enemy1, this.collisionLayers);
 

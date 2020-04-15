@@ -8,6 +8,7 @@ export default class Jumper extends Walker {
     }
 
     update() {
+        super.update();
         this.moveHorizontal();
         this.jumperTimer++;
         if (this.jumpTrigger < this.jumperTimer && this.body.blocked.down) {
