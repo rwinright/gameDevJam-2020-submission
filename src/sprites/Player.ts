@@ -2,14 +2,13 @@ import Enemy from "./Enemy";
 
 export default class Player extends Phaser.Physics.Arcade.Sprite {
   ammo: number = 0;
-  hp: number = 10;
   alive: boolean = true;
   knockback: boolean = false;
   knockbackTimer: number = 0;
+  public hp: number = 10;
 
   constructor(scene: any, x: number, y: number, texture: any) {
     super(scene, x, y, texture);
-
     scene.add.existing(this);
     scene.physics.add.existing(this);
     scene.physics.world.enable(this);
@@ -27,7 +26,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
   private direction: number;
   private facingRight = false;
   private facingUp = false;
-  private bulletGroup: any;
+  public bulletGroup: any;
   private bulletTime: number = 0;
 
   private shootTimer = 0;
@@ -118,10 +117,10 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     }
   }
   update(keys: any) {
-    console.log(this.hp);
     this.bulletTime++;
     if (this.hp <= 0) {
       this.alive = false;
+      this.disableBody(true, true);
     }
     if (this.alive && !this.knockback) {
       //Auto-resize the character-box.

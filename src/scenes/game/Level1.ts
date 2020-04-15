@@ -74,6 +74,11 @@ export default class Level1 extends Scene {
       this.Enemies,
       this.collideWEnemy);
 
+    this.physics.add.collider(
+      this.player1.bulletGroup,
+      this.Enemies,
+      this.collideWBullet
+    )
     //force camera bounds from the map width/height and follow the player
     this.cameras.main
       .startFollow(this.player1, false, 0.1, 0.5, 0, 0)
@@ -82,9 +87,14 @@ export default class Level1 extends Scene {
     console.log(map.widthInPixels);
     console.log(map.heightInPixels);
   }
+  public collideWBullet(e: Enemy, b: any) {
+    b.disableBody(true, true);
+    e.hp--;
+  }
 
   public collideWEnemy(p: Player, e: Enemy) {
     p.knockback = true;
+    p.flyBack();
     e.reverseDirection();
   }
 
