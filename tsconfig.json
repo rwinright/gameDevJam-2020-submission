@@ -6,5 +6,10 @@
     "module": "es6",
     "target": "es5",
     "allowJs": true
-  }
+  },
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts",
+        "src/assets/world/maps/*.tsx"
+    ]
 }

@@ -1,10 +1,13 @@
 import { Scene } from 'phaser';
 import { CST } from '../../CST';
 
-//Import files
-import levelTiles from "../../assets/world/tiles/tiles.png";
-import levelBackground from "../../assets/world/tiles/background.png";
-import level1Json from '../../assets/tilemaps/large-test-level.json';
+//Level1 tilesets
+import anotherWorldTiles from '../../assets/world/tiles/Level1/another-world-tileset.png';
+import scifiEnvironmentTiles from '../../assets/world/tiles/Level1/sci-fi-environment-tileset.png';
+import level1Json from '../../assets/tilemaps/level1.json';
+
+//Backgrounds
+
 
 import spriteSheetAtlas from '../../assets/player/Player_1_Sprite_Sheet.json';
 
@@ -98,9 +101,12 @@ export default class LoadScene extends Scene {
 		//Load assets for the game below this
 
     //Import level tiles
-    this.load.image('cave', levelTiles);
-    this.load.image('caveBG', levelBackground);
-    this.load.tilemapTiledJSON('level1Map', level1Json);
+    this.load.image('another-world', anotherWorldTiles);
+    this.load.image('sci-fi-environment', scifiEnvironmentTiles);
+	this.load.tilemapTiledJSON('level1Map', level1Json);
+	
+	//Level 1 tiles
+
 
     //Player Sprites
     this.load.multiatlas('player1', spriteSheetAtlas, 'src/assets/player/');
