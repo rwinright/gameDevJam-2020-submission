@@ -1,7 +1,7 @@
 import { Scene, Cameras } from 'phaser';
 
-import levelTiles from "../assets/world/tiles/tiles.png";
-import levelBackground from "../assets/world/tiles/background.png";
+// import levelTiles from "../assets/world/tiles/tiles.png";
+// import levelBackground from "../../assets/world/tiles/level1/back-towers.png";
 
 import levelJson from "../assets/tilemaps/large-test-level.json";
 import { CST } from '../../CST';
@@ -32,6 +32,8 @@ export default class Level1 extends Scene {
     const map = this.make.tilemap({ key: 'level1Map' });
     // const bgTiles = map.addTilesetImage("cave background", 'caveBG');
     // const tiles = map.addTilesetImage("cave tileset", 'cave');
+    console.log(map.heightInPixels)
+    this.add.tileSprite(0, 0, map.heightInPixels, map.heightInPixels, 'back-towers', )
 
     const tileList = [{
       tilesetName: "another-world-tileset",
@@ -52,6 +54,7 @@ export default class Level1 extends Scene {
 
     //Since backgrounds are usually dynamic, this layer is created separately. 
     // map.createStaticLayer('Background', bgTiles, 0, 200);
+    // this.add.image(0, 0, 'back-towers');
 
     //This needs some hardcore refactoring
     layerNames.forEach((layerName: string) => {
