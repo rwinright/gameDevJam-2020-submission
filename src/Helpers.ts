@@ -1,7 +1,7 @@
 //An assorted assortment of helpful helper functions to help you clean up your classy classes.
 
 export default function Helpers() {
-  let generateAnimations = (frames: any, scene: any, textureKey: any,  frameNameOverride?: any) => {
+  let generateAnimations = (frames: any, scene: any, textureKey: any) => {
     frames.forEach((frame: any) => {
 
       let generatedFrames = scene.anims.generateFrameNames(textureKey, {
