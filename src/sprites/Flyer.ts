@@ -10,6 +10,7 @@ export default class Flyer extends Walker {
     }
 
     update() {
+        super.update();
         this.walkTimer++;
         if (this.moveUp) {
             this.moveVertical();

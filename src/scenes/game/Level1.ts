@@ -21,6 +21,7 @@ export default class Level1 extends Scene {
   public player1: Player;
   //will update to make this an array just want to get a single one working first
   public enemy1: Enemy;
+  public Enemies: Enemy[] = [];
   private collisionLayers: any = [];
 
   init(data: any) {
@@ -70,9 +71,12 @@ export default class Level1 extends Scene {
       }
     });
 
-    this.enemy1 = new Jumper(this, 100, 500, 'player1');
+    this.enemy1 = new Flyer(this, 100, 500, 'player1');
     //this.enemy1.create();
     this.physics.add.collider(this.enemy1, this.collisionLayers);
+
+    //Add to Enemy Array 
+    this.Enemies.push(this.enemy1);
 
     this.player1 = new Player(this, 400, 400, 'player1');
 
@@ -83,16 +87,43 @@ export default class Level1 extends Scene {
     //Set player collision with platforms.
     this.physics.add.collider(this.player1, this.collisionLayers);
 
+    //Set Collision with Enemies
+    //this.physics.add.collider(this.player1, this.Enemies);
+    this.physics.add.collider(
+      this.player1,
+      this.Enemies,
+      this.collideWEnemy);
 
+    this.physics.add.collider(
+      this.player1.bulletGroup,
+      this.Enemies,
+      this.collideWBullet
+    )
     //force camera bounds from the map width/height and follow the player
     this.cameras.main
       .startFollow(this.player1, false, 0.1, 0.5, 0, 0)
       .setBounds(0, 0, map.widthInPixels, map.heightInPixels); //Follow the player
 
   }
+  public collideWBullet(e: Enemy, b: any) {
+    b.disableBody(true, true);
+    e.hp--;
+  }
+
+  public collideWEnemy(p: Player, e: Enemy) {
+    p.knockback = true;
+    p.flyBack();
+    e.reverseDirection();
+  }
 
   public update() {
-    this.player1.update(this.keys);
+    if (this.player1.alive) {
+      this.player1.update(this.keys);
+    }
     this.enemy1.update();
+    // let pHit = this.physics.collide(this.player1, this.enemy1);
+    // if(pHit){
+    //   this.player1
+    // }
   }
 }
