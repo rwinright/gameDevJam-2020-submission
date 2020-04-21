@@ -1,3 +1,5 @@
+import Helpers from "../Helpers";
+
 export default class Player extends Phaser.Physics.Arcade.Sprite {
   ammo: number
   
@@ -28,7 +30,6 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
 
   create() {
-    
     //Bullet frames and stuff
     this.bulletGroup = this.scene.physics.add.group({ runChildUpdate: true });
 
@@ -43,62 +44,43 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
       repeat: 0
     });
 
-    //Generate character frames
-    //TODO: Place into separate file for reuse?
-    // This will all be different too.
-    let idleFrames = this.scene.anims.generateFrameNames(this.texture.key, {
-      start: 0, end: 5, zeroPad: 4, prefix: 'idle/', suffix: '.png'
-    });
-    let runFrames = this.scene.anims.generateFrameNames(this.texture.key, {
-      start: 0, end: 7, zeroPad: 4, prefix: 'run/', suffix: '.png'
-    });
-    let kneelFrame = this.scene.anims.generateFrameNames(this.texture.key, {
-      start: 0, end: 1, zeroPad: 4, prefix: 'kneel/', suffix: '.png'
-    });
-    let jumpFrames = this.scene.anims.generateFrameNames(this.texture.key, {
-      start: 0, end: 1, zeroPad: 4, prefix: 'jump/', suffix: '.png'
-    });
-    let aimUpFrames = this.scene.anims.generateFrameNames(this.texture.key, {
-      start: 0, end: 1, zeroPad: 4, prefix: 'idle_shoot_up/', suffix: '.png'
-    });
-
     //Create player animations
     //TODO: Place into another file for reuse?
     //This will go to the helper function
-    this.scene.anims.create({
-      key: 'idle',
-      frames: idleFrames,
-      frameRate: 5,
-      repeat: -1
-    });
+    let playerAnims = [
+			{
+        frameName: "space-marine-idle", //Name of the frame within the atlas file
+        frameNameOverride: "idle", //What you would like to name the frame to be used in anims.play();
+				start: 0, //Starting frame
+				end: 3, //Ending frame
+				frameRate: 15, //How fast the animation runs
+				repeat: -1 //Whether or not it repeats. (-1 means "infinitely")
+			},{
+        frameName: "space-marine-run",
+        frameNameOverride: "run",
+				start: 0,
+				end: 3,
+				frameRate: 15,
+				repeat: -1
+      },{
+        frameName: "space-marine-jump",
+        frameNameOverride: "jump",
+				start: 0,
+				end: 3,
+				frameRate: 15,
+				repeat: 1
+      },{
+        frameName: "space-marine-shoot",
+        frameNameOverride: "shoot",
+				start: 0,
+				end: 1,
+				frameRate: 15,
+				repeat: -1
+      }
 
-    this.scene.anims.create({
-      key: 'run',
-      frames: runFrames,
-      frameRate: 10,
-      repeat: -1
-    });
+		];
 
-    this.scene.anims.create({
-      key: 'jump',
-      frames: jumpFrames,
-      frameRate: 10,
-      repeat: -1
-    });
-
-    this.scene.anims.create({
-      key: 'aim-up-idle',
-      frames: aimUpFrames,
-      frameRate: 10,
-      repeat: -1
-    });
-
-    this.scene.anims.create({
-      key: 'kneel',
-      frames: kneelFrame,
-      frameRate: 1,
-      repeat: -1
-    });
+    Helpers().generateAnimations(playerAnims, this.scene, this.texture.key);
   }
 
   update(keys: any) {
@@ -126,18 +108,6 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     } else if (this.body.blocked.down && !this.direction && !this.body.velocity.x) {
       this.anims.play("idle", true);
       this.body.height = this.frame.height * 2;
-      // console.log(this.frame.height)
-    }
-
-    //Kneel
-    //There's also an animation for kneel-shooting
-    if (keys.S.isDown) {
-      this.anims.play("kneel", true);
-      if (this.body.blocked.down) {
-        this.setVelocityX(0);
-        this.body.height = this.frame.height * 2;
-        this.y += 8;
-      }
     }
 
     //Jump
@@ -148,50 +118,8 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     if (this.body.velocity.y < 0 && !this.body.blocked.down) {
       this.anims.play("jump", true);
     }
-    if (keys.E.isDown && this.bulletTime > 30) {
-      this.bulletTime = 0;
-      let bullet = this.bulletGroup.create(this.x, this.y, this.texture.key).setScale(2);
-      bullet.body.setVelocity(this.facingRight ? 500 : -500, 0);
-      !this.facingRight ? bullet.flipX = true : null;
-      bullet.body.setAllowGravity(false);
-      bullet.anims.play('bullet');
-      // bullet.setOrigin(0.5, 0.5);
-      bullet.setSize(8, 5);
-    }
 
     this.shootTimer++;
-    if (keys.Q.isDown && this.shootTimer % 10 == 0) {
-      let b = this.bulletGroup.create(this.x, this.y, this.texture.key).setScale(2);
-      b.body.setAllowGravity(false);
-      b.anims.play('bullet');
-      b.setSize(8, 5);
-
-      let speed = 1000;
-      this.ammo--;
-
-      //console.log(this.ammo);
-      if (this.facingUp) {
-        b.setVelocityY(-speed);
-        b.setRotation(90);
-      }
-      else if (this.facingRight) {
-        b.setVelocityX(speed);
-        b.flipX = true;
-        b.x += 20;
-      }
-      else {
-        b.setVelocityX(-speed);
-        b.x -= 20;
-      }
-    }
-
-    //Aiming
-    if (keys.W.isDown) {
-      this.facingUp = true;
-      this.anims.play("aim-up-idle", true);
-    } else {
-      this.facingUp = false;
-    }
 
     //Climbing!!!!!
     //Limit this to certain rocky/viney surfaces. 

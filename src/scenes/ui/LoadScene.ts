@@ -9,7 +9,7 @@ import level1Json from '../../assets/tilemaps/Level1.json';
 import backTowers from '../../assets/world/tiles/Level1/back-towers.png';
 
 
-import spriteSheetAtlas from '../../assets/player/Player_1_Sprite_Sheet.json';
+import spriteSheetAtlas from '../../assets/player/Player1/player-1.json';
 
 //The scene that loads all of the game assets and displays a progress bar.
 export default class LoadScene extends Scene {
@@ -110,7 +110,7 @@ export default class LoadScene extends Scene {
 
 
     //Player Sprites
-    this.load.multiatlas('player1', spriteSheetAtlas, 'src/assets/player/');
+    this.load.multiatlas('player1', spriteSheetAtlas, 'src/assets/player/Player1');
 
 		this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
 	}
