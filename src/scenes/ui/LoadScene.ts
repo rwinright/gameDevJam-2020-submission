@@ -4,9 +4,9 @@ import { CST } from '../../CST';
 //Level1 tilesets
 import anotherWorldTiles from '../../assets/world/tiles/Level1/another-world-tileset.png';
 import scifiEnvironmentTiles from '../../assets/world/tiles/Level1/sci-fi-environment-tileset.png';
-import level1Json from '../../assets/tilemaps/level1.json';
-import backTowers from '../../assets/world/tiles/level1/back-towers.png';
+import level1Json from '../../assets/tilemaps/Level1.json';
 //Backgrounds
+import backTowers from '../../assets/world/tiles/Level1/back-towers.png';
 
 
 import spriteSheetAtlas from '../../assets/player/Player_1_Sprite_Sheet.json';

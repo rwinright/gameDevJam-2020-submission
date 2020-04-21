@@ -1,9 +1,5 @@
 import { Scene, Cameras } from 'phaser';
 
-// import levelTiles from "../assets/world/tiles/tiles.png";
-// import levelBackground from "../../assets/world/tiles/level1/back-towers.png";
-
-import levelJson from "../assets/tilemaps/large-test-level.json";
 import { CST } from '../../CST';
 
 //Import Player sprites
@@ -30,13 +26,11 @@ export default class Level1 extends Scene {
   public create() {
     //Probably going to extract all this to the "helper function"
     const map = this.make.tilemap({ key: 'level1Map' });
-    // const bgTiles = map.addTilesetImage("cave background", 'caveBG');
-    // const tiles = map.addTilesetImage("cave tileset", 'cave');
-    console.log(map.heightInPixels)
-    this.add.tileSprite(0, 0, map.heightInPixels, map.heightInPixels, 'back-towers', )
+
+    this.add.tileSprite(0, 0, map.heightInPixels, map.heightInPixels, 'back-towers');
 
     const tileList = [{
-      tilesetName: "another-world-tileset",
+      tilesetName: "level-1",
       key: "another-world"
     }, {
       tilesetName: "sci-fi-environment-tileset",
@@ -50,20 +44,19 @@ export default class Level1 extends Scene {
 
     console.log(extractedTiles);
     //Set the names of the layers in the json file.
-    const layerNames = ["Ground", "Base", "GroundDecoration", "Conduits"];
-
+    
     //Since backgrounds are usually dynamic, this layer is created separately. 
-    // map.createStaticLayer('Background', bgTiles, 0, 200);
-    // this.add.image(0, 0, 'back-towers');
-
+    
     //This needs some hardcore refactoring
+    const layerNames = ["Ground", "Base", "Conduits", "GroundDecoration", "BaseRoof", "BaseDecoration" ];
     layerNames.forEach((layerName: string) => {
-      if (layerName === "Ground") { //Layernames that need collisions
+      console.log(layerName);
+      if (layerName === "Ground" || layerName === "BaseRoof") { //Layernames that need collisions
         //Temporary variable for the collision layer;
-        let colLayer = map.createStaticLayer(layerName, extractedTiles[0], 0, 200).setCollisionByExclusion([-1]);
+        let colLayer = map.createStaticLayer(layerName, extractedTiles[layerName === "BaseRoof" ? 1 : 0], 0, 200).setCollisionByExclusion([-1]);
         //Put the layers requiring collision into the outer array so the player can access it.
         this.collisionLayers.push(colLayer);
-      } else if (layerName === "Base" || layerName === "Conduits"){
+      } else if (layerName === "Base" || layerName === "Conduits" || layerName === "BaseDecoration"){
         map.createStaticLayer(layerName, extractedTiles[1], 0, 200);
       }else {
         map.createStaticLayer(layerName, extractedTiles[0], 0, 200);
