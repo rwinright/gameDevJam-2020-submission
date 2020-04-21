@@ -1,7 +1,7 @@
 import { Scene, Cameras } from 'phaser';
 
-import levelTiles from "../assets/world/tiles/tiles.png";
-import levelBackground from "../assets/world/tiles/background.png";
+// import levelTiles from "../assets/world/tiles/tiles.png";
+// import levelBackground from "../../assets/world/tiles/level1/back-towers.png";
 
 import levelJson from "../assets/tilemaps/large-test-level.json";
 import { CST } from '../../CST';
@@ -31,23 +31,43 @@ export default class Level1 extends Scene {
   public create() {
     //Probably going to extract all this to the "helper function"
     const map = this.make.tilemap({ key: 'level1Map' });
-    const bgTiles = map.addTilesetImage("cave background", 'caveBG');
-    const tiles = map.addTilesetImage("cave tileset", 'cave');
+    // const bgTiles = map.addTilesetImage("cave background", 'caveBG');
+    // const tiles = map.addTilesetImage("cave tileset", 'cave');
+    console.log(map.heightInPixels)
+    this.add.tileSprite(0, 0, map.heightInPixels, map.heightInPixels, 'back-towers', )
 
+    const tileList = [{
+      tilesetName: "another-world-tileset",
+      key: "another-world"
+    }, {
+      tilesetName: "sci-fi-environment-tileset",
+      key: "sci-fi-environment"
+    }]
+
+    //
+    let extractedTiles = tileList.map((tile: any)=> {
+      return map.addTilesetImage(tile.tilesetName, tile.key);
+    });
+
+    console.log(extractedTiles);
     //Set the names of the layers in the json file.
-    const layerNames = ["Platforms"];
+    const layerNames = ["Ground", "Base", "GroundDecoration", "Conduits"];
 
     //Since backgrounds are usually dynamic, this layer is created separately. 
-    map.createStaticLayer('Background', bgTiles, 0, 200);
+    // map.createStaticLayer('Background', bgTiles, 0, 200);
+    // this.add.image(0, 0, 'back-towers');
+
     //This needs some hardcore refactoring
     layerNames.forEach((layerName: string) => {
-      if (layerName === "Platforms") { //Layernames that need collisions
+      if (layerName === "Ground") { //Layernames that need collisions
         //Temporary variable for the collision layer;
-        let colLayer = map.createStaticLayer(layerName, tiles, 0, 200).setCollisionByExclusion([-1]);
+        let colLayer = map.createStaticLayer(layerName, extractedTiles[0], 0, 200).setCollisionByExclusion([-1]);
         //Put the layers requiring collision into the outer array so the player can access it.
         this.collisionLayers.push(colLayer);
-      } else {
-        map.createStaticLayer(layerName, tiles, 0, 200);
+      } else if (layerName === "Base" || layerName === "Conduits"){
+        map.createStaticLayer(layerName, extractedTiles[1], 0, 200);
+      }else {
+        map.createStaticLayer(layerName, extractedTiles[0], 0, 200);
       }
     });
 
@@ -84,8 +104,6 @@ export default class Level1 extends Scene {
       .startFollow(this.player1, false, 0.1, 0.5, 0, 0)
       .setBounds(0, 0, map.widthInPixels, map.heightInPixels); //Follow the player
 
-    console.log(map.widthInPixels);
-    console.log(map.heightInPixels);
   }
   public collideWBullet(e: Enemy, b: any) {
     b.disableBody(true, true);
