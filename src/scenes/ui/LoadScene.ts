@@ -5,7 +5,7 @@ import { CST } from '../../CST';
 import anotherWorldTiles from '../../assets/world/tiles/Level1/another-world-tileset.png';
 import scifiEnvironmentTiles from '../../assets/world/tiles/Level1/sci-fi-environment-tileset.png';
 import level1Json from '../../assets/tilemaps/level1.json';
-
+import backTowers from '../../assets/world/tiles/level1/back-towers.png';
 //Backgrounds
 
 
@@ -104,6 +104,7 @@ export default class LoadScene extends Scene {
     this.load.image('another-world', anotherWorldTiles);
     this.load.image('sci-fi-environment', scifiEnvironmentTiles);
 	this.load.tilemapTiledJSON('level1Map', level1Json);
+	this.load.image('back-towers', backTowers);
 	
 	//Level 1 tiles
 
