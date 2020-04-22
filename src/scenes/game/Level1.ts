@@ -20,6 +20,10 @@ export default class Level1 extends Scene {
   public Enemies: Enemy[] = [];
   private collisionLayers: any = [];
 
+  init(data: any) {
+    console.log(data.play);
+  }
+
   public create() {
     //Probably going to extract all this to the "helper function"
     const map = this.make.tilemap({ key: 'level1Map' });
@@ -39,24 +43,24 @@ export default class Level1 extends Scene {
       return map.addTilesetImage(tile.tilesetName, tile.key);
     });
 
-    // console.log(extractedTiles);
+    console.log(extractedTiles);
     //Set the names of the layers in the json file.
     
     //Since backgrounds are usually dynamic, this layer is created separately. 
     
     //This needs some hardcore refactoring
-    //Also send to the goddamn helper function
     const layerNames = ["Ground", "Base", "Conduits", "GroundDecoration", "BaseRoof", "BaseDecoration" ];
     layerNames.forEach((layerName: string) => {
+      console.log(layerName);
       if (layerName === "Ground" || layerName === "BaseRoof") { //Layernames that need collisions
         //Temporary variable for the collision layer;
-        let colLayer = map.createStaticLayer(layerName, extractedTiles[layerName === "BaseRoof" ? 1 : 0], 0, 200).setCollisionByExclusion([-1]);
+        let colLayer = map.createStaticLayer(layerName, extractedTiles[layerName === "BaseRoof" ? 1 : 0], 0, 0).setCollisionByExclusion([-1]);
         //Put the layers requiring collision into the outer array so the player can access it.
         this.collisionLayers.push(colLayer);
       } else if (layerName === "Base" || layerName === "Conduits" || layerName === "BaseDecoration"){
-        map.createStaticLayer(layerName, extractedTiles[1], 0, 200);
+        map.createStaticLayer(layerName, extractedTiles[1], 0, 0);
       }else {
-        map.createStaticLayer(layerName, extractedTiles[0], 0, 200);
+        map.createStaticLayer(layerName, extractedTiles[0], 0, 0);
       }
     });
 

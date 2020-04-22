@@ -98,6 +98,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
       //Auto-resize the character-box.
       this.body.height = this.frame.cutHeight * 2;
       this.body.width = this.frame.cutWidth * 2;
+      this.body.setOffset(this.frame.centerX, this.frame.centerY);
 
       //movement/jumping
       this.direction = (keys.D.isDown - keys.A.isDown);
@@ -136,7 +137,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         !this.facingRight ? bullet.flipX = true : null;
         bullet.body.setAllowGravity(false);
         bullet.anims.play('bullet');
-        // bullet.setOrigin(0.5, 0.5);
+        bullet.setOrigin(0.5, 0.5);
         bullet.setSize(8, 5);
       }
 
