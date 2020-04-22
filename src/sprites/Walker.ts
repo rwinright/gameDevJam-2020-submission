@@ -13,6 +13,7 @@ export default class Walker extends Enemy {
     }
 
     update() {
+        super.update();
         this.walkTimer++;
         this.moveHorizontal();
     }

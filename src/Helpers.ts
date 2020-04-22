@@ -12,7 +12,7 @@ export default function Helpers() {
       });
 
       scene.anims.create({
-        key: frame.frameNameOverride ? frame.frameNameOverride : frame.frameName,
+        key: frame.frameNameOverride || frame.frameName,
         frames: generatedFrames,
         frameRate: 10,
         repeat: frame.repeat

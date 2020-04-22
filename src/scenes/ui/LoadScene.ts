@@ -8,20 +8,20 @@ import level1Json from '../../assets/tilemaps/Level1.json';
 //Backgrounds
 import backTowers from '../../assets/world/tiles/Level1/back-towers.png';
 
-
-import spriteSheetAtlas from '../../assets/player/Player1/player-1.json';
+import spriteSheetAtlas from '../../assets/player/Player1/Player_1_Sprite_Sheet.json';
+import { config } from '../../config/config';
 
 //The scene that loads all of the game assets and displays a progress bar.
 export default class LoadScene extends Scene {
-  readyCount: any;
-  timedEvent: any;
+	readyCount: any;
+	timedEvent: any;
 	constructor() {
 		super({
-      key: CST.SCENES.UI.PRELOAD
+			key: CST.SCENES.UI.PRELOAD
 		});
 	}
 
-	init(){
+	init() {
 		this.readyCount = 0;
 	}
 
@@ -31,7 +31,7 @@ export default class LoadScene extends Scene {
 		const height = this.cameras.main.height;
 
 		//Add the logo image
-		let logo = this.add.image(width/2, height/2 -200, 'logo');
+		let logo = this.add.image(width / 2, height / 2 - 200, 'logo');
 		logo.setScale(0.1)
 
 		const progressBar = this.add.graphics();
@@ -87,7 +87,7 @@ export default class LoadScene extends Scene {
 		this.load.on('fileprogress', function (file: any) {
 			assetText.setText('Loading asset: ' + file.key);
 		});
-	 
+
 		// remove progress bar when complete
 		this.load.on('complete', () => {
 			progressBar.destroy();
@@ -100,24 +100,27 @@ export default class LoadScene extends Scene {
 
 		//Load assets for the game below this
 
-    //Import level tiles
-    this.load.image('another-world', anotherWorldTiles);
-    this.load.image('sci-fi-environment', scifiEnvironmentTiles);
-	this.load.tilemapTiledJSON('level1Map', level1Json);
-	this.load.image('back-towers', backTowers);
-	
-	//Level 1 tiles
+		//Import level tiles
+		//Level 1 tiles
+		this.load.image('another-world', anotherWorldTiles);
+		this.load.image('sci-fi-environment', scifiEnvironmentTiles);
+		this.load.tilemapTiledJSON('level1Map', level1Json);
+		this.load.image('back-towers', backTowers);
 
 
-    //Player Sprites
-    this.load.multiatlas('player1', spriteSheetAtlas, 'src/assets/player/Player1');
 
-		this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
+		//Player Sprites
+		this.load.multiatlas('player1', spriteSheetAtlas, 'src/assets/player/Player1');
+
+		//Set the timing event to show the initial logo
+		//Delay is instantaneous if we're in debug mode.
+		let time = config.physics.arcade.debug ? 0 : 3000;
+		this.timedEvent = this.time.delayedCall(time, this.ready, [], this);
 	}
 
-	ready(){
+	ready() {
 		this.readyCount++;
-		if(this.readyCount === 2){
+		if (this.readyCount === 2) {
 			// this.scene.start(CST.SCENES.UI.TITLE);
 			//You can override it here if you want to just skip to what you were working on.
 			this.scene.start(CST.SCENES.GAME.LEVEL1);
