@@ -6,14 +6,18 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this);
         scene.physics.add.existing(this);
         scene.physics.world.enable(this);
+        scene.physics.add.collider(this, scene.collisionLayers);
         this.setScale(2);
         // this.setBounce(1, 1);
 
         //Just for debugging stuff
-        this.setCollideWorldBounds(false);
+        this.setCollideWorldBounds(true);
 
         this.setVelocity(0, 0);
-        this.enemyGroup = this.scene.physics.add.group({ runChildUpdate: true });
+        this.enemyGroup = this.scene.physics.add.group({
+            key: "enemies",
+            runChildUpdate: true
+        });
 
 
     }
@@ -23,9 +27,11 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
         if (this.hp <= 0) {
             this.disableBody(true, true);
         }
+        //console.log(this.body.blocked.up);
     }
     reverseDirection() {
         this.facingRight = !this.facingRight;
+        console.log(this.facingRight);
     }
     private enemyGroup: any;
 

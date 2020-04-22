@@ -2,16 +2,19 @@ import Walker from "./Walker";
 
 export default class Flyer extends Walker {
     moveUp: boolean = true;
-    facingUp: boolean = false;
+    facingUp: boolean = true;
     constructor(scene: any, x: number, y: number, texture: any) {
         super(scene, x, y, texture);
         this.maxFallSpeed = 0;
-        this.maxWalktime = 50;
+        this.maxWalktime = 1000;
     }
 
     update() {
         super.update();
-        this.walkTimer++;
+        // if (this.body.blocked.up || this.body.blocked.down
+        //     || this.body.blocked.left || this.body.blocked.right) {
+        //     this.reverseDirection();
+        // }
         if (this.moveUp) {
             this.moveVertical();
         }
@@ -22,7 +25,7 @@ export default class Flyer extends Walker {
 
     moveVertical() {
         if (this.walkTimer > this.maxWalktime) {
-            this.facingUp = !this.facingUp;
+            this.reverseDirection();
             this.walkTimer = 0;
         }
         if (this.body.blocked.up) {
@@ -33,14 +36,24 @@ export default class Flyer extends Walker {
             this.walkTimer = 0;
             this.facingUp = true;
         }
-
         if (this.facingUp) {
-            this.setVelocityY(this.speed);
+            this.setVelocityY(-this.speed);
             this.setMaxVelocity(this.maxFallSpeed, this.speed);
         }
         else {
-            this.setVelocityY(-this.speed);
+            this.setVelocityY(this.speed);
             this.setMaxVelocity(this.maxFallSpeed, this.speed);
+        }
+    }
+
+    reverseDirection() {
+        //console.log(this.moveUp);
+
+        if (this.moveUp) {
+            this.facingUp != this.facingUp;
+        }
+        else {
+            this.facingRight != this.facingRight;
         }
     }
 }

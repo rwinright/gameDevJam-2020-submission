@@ -12,6 +12,7 @@ import Enemy from '../../sprites/Enemy';
 import Walker from '../../sprites/Walker';
 import Flyer from '../../sprites/Flyer';
 import Jumper from '../../sprites/Jumper';
+import Spawner from '../../sprites/spawner';
 
 export default class Level1 extends Scene {
   constructor() {
@@ -22,6 +23,7 @@ export default class Level1 extends Scene {
   //will update to make this an array just want to get a single one working first
   public enemy1: Enemy;
   public Enemies: Enemy[] = [];
+  public spawner: Spawner;
   private collisionLayers: any = [];
 
   init(data: any) {
@@ -34,7 +36,7 @@ export default class Level1 extends Scene {
     // const bgTiles = map.addTilesetImage("cave background", 'caveBG');
     // const tiles = map.addTilesetImage("cave tileset", 'cave');
     console.log(map.heightInPixels)
-    this.add.tileSprite(0, 0, map.heightInPixels, map.heightInPixels, 'back-towers', )
+    this.add.tileSprite(0, 0, map.heightInPixels, map.heightInPixels, 'back-towers')
 
     const tileList = [{
       tilesetName: "another-world-tileset",
@@ -45,7 +47,7 @@ export default class Level1 extends Scene {
     }]
 
     //
-    let extractedTiles = tileList.map((tile: any)=> {
+    let extractedTiles = tileList.map((tile: any) => {
       return map.addTilesetImage(tile.tilesetName, tile.key);
     });
 
@@ -64,19 +66,17 @@ export default class Level1 extends Scene {
         let colLayer = map.createStaticLayer(layerName, extractedTiles[0], 0, 200).setCollisionByExclusion([-1]);
         //Put the layers requiring collision into the outer array so the player can access it.
         this.collisionLayers.push(colLayer);
-      } else if (layerName === "Base" || layerName === "Conduits"){
+      } else if (layerName === "Base" || layerName === "Conduits") {
         map.createStaticLayer(layerName, extractedTiles[1], 0, 200);
-      }else {
+      } else {
         map.createStaticLayer(layerName, extractedTiles[0], 0, 200);
       }
     });
-
-    this.enemy1 = new Flyer(this, 100, 500, 'player1');
-    //this.enemy1.create();
+    this.spawner = new Spawner(this, 400, 500, 'player1');
+    this.enemy1 = new Flyer(this, 200, 300, 'player1');
     this.physics.add.collider(this.enemy1, this.collisionLayers);
-
+    this.physics.add.collider(this.spawner, this.collisionLayers);
     //Add to Enemy Array 
-    this.Enemies.push(this.enemy1);
 
     this.player1 = new Player(this, 400, 400, 'player1');
 
@@ -91,12 +91,12 @@ export default class Level1 extends Scene {
     //this.physics.add.collider(this.player1, this.Enemies);
     this.physics.add.collider(
       this.player1,
-      this.Enemies,
+      this.spawner.EnemyGroup,
       this.collideWEnemy);
 
     this.physics.add.collider(
       this.player1.bulletGroup,
-      this.Enemies,
+      this.spawner.EnemyGroup,
       this.collideWBullet
     )
     //force camera bounds from the map width/height and follow the player
@@ -116,14 +116,21 @@ export default class Level1 extends Scene {
     e.reverseDirection();
   }
 
+  public AddEnemyCollisions(o: any) {
+    this.physics.add.collider(o, this.collisionLayers);
+    this.physics.add.collider(this.player1, o, this.collideWEnemy);
+  }
+
   public update() {
+    this.spawner.update();
     if (this.player1.alive) {
       this.player1.update(this.keys);
     }
-    this.enemy1.update();
-    // let pHit = this.physics.collide(this.player1, this.enemy1);
-    // if(pHit){
-    //   this.player1
-    // }
+    //this.enemy1.update();
+    for (let i = 0; i < this.Enemies.length; i++) {
+      let e = this.Enemies[i];
+      e.update();
+    }
+
   }
 }
