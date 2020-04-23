@@ -73,7 +73,7 @@ export default class Level1 extends Scene {
       }
     });
     this.spawner = new Spawner(this, 400, 500, 'player1');
-    this.enemy1 = new Flyer(this, 200, 300, 'player1');
+    this.enemy1 = new Walker(this, 200, 300, 'player1');
     this.physics.add.collider(this.enemy1, this.collisionLayers);
     this.physics.add.collider(this.spawner, this.collisionLayers);
     //Add to Enemy Array 
@@ -95,8 +95,8 @@ export default class Level1 extends Scene {
       this.collideWEnemy);
 
     this.physics.add.collider(
-      this.player1.bulletGroup,
       this.spawner.EnemyGroup,
+      this.player1.bulletGroup,
       this.collideWBullet
     )
     //force camera bounds from the map width/height and follow the player
@@ -114,11 +114,6 @@ export default class Level1 extends Scene {
     p.knockback = true;
     p.flyBack();
     e.reverseDirection();
-  }
-
-  public AddEnemyCollisions(o: any) {
-    this.physics.add.collider(o, this.collisionLayers);
-    this.physics.add.collider(this.player1, o, this.collideWEnemy);
   }
 
   public update() {

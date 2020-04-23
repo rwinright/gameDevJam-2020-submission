@@ -1,5 +1,6 @@
 export default class Enemy extends Phaser.Physics.Arcade.Sprite {
     facingRight: boolean = true;
+    public hp: number = 3;
 
     constructor(scene: any, x: number, y: number, texture: any) {
         super(scene, x, y, texture);
@@ -8,7 +9,6 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
         scene.physics.world.enable(this);
         scene.physics.add.collider(this, scene.collisionLayers);
         this.setScale(2);
-        // this.setBounce(1, 1);
 
         //Just for debugging stuff
         this.setCollideWorldBounds(true);
@@ -18,16 +18,12 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
             key: "enemies",
             runChildUpdate: true
         });
-
-
     }
-    public hp: number = 3;
 
     update() {
         if (this.hp <= 0) {
             this.disableBody(true, true);
         }
-        //console.log(this.body.blocked.up);
     }
     reverseDirection() {
         this.facingRight = !this.facingRight;

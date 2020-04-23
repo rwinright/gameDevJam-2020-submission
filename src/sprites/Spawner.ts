@@ -20,12 +20,6 @@ export default class Spawner extends Phaser.Physics.Arcade.Sprite {
             key: "enemies",
             runChildUpdate: true
         });
-
-
-    }
-    create() {
-
-
     }
     update() {
         this.spawnTimer++;
@@ -41,8 +35,6 @@ export default class Spawner extends Phaser.Physics.Arcade.Sprite {
     makeEnemy() {
         if (this.spawn) {
             this.spawn = false;
-            //let e = new Walker(this.scene, this.x, this.y, "player1");
-            //let e = this.EnemyGroup.create(this.x, this.y, this.texture.key);
             let e = new Walker(this.scene, this.x, this.y, "player1");
             this.EnemyGroup.add(e);
 
