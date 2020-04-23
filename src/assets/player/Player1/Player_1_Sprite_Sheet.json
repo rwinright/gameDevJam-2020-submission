@@ -1,0 +1,545 @@
+{
+	"textures": [
+		{
+			"image": "Player_1_Sprite_Sheet.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 801,
+				"h": 40
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "space-marine-shoot-1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 62,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 10,
+						"w": 52,
+						"h": 38
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 52,
+						"h": 38
+					}
+				},
+				{
+					"filename": "space-marine-shoot-0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 62,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 10,
+						"w": 43,
+						"h": 38
+					},
+					"frame": {
+						"x": 55,
+						"y": 1,
+						"w": 43,
+						"h": 38
+					}
+				},
+				{
+					"filename": "space-marine-idle-1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 10,
+						"w": 34,
+						"h": 38
+					},
+					"frame": {
+						"x": 100,
+						"y": 1,
+						"w": 34,
+						"h": 38
+					}
+				},
+				{
+					"filename": "space-marine-idle-3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 10,
+						"w": 34,
+						"h": 38
+					},
+					"frame": {
+						"x": 100,
+						"y": 1,
+						"w": 34,
+						"h": 38
+					}
+				},
+				{
+					"filename": "space-marine-idle-2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 10,
+						"w": 33,
+						"h": 38
+					},
+					"frame": {
+						"x": 136,
+						"y": 1,
+						"w": 33,
+						"h": 38
+					}
+				},
+				{
+					"filename": "space-marine-idle-0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 11,
+						"w": 34,
+						"h": 37
+					},
+					"frame": {
+						"x": 171,
+						"y": 1,
+						"w": 34,
+						"h": 37
+					}
+				},
+				{
+					"filename": "space-marine-run-0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 11,
+						"w": 34,
+						"h": 37
+					},
+					"frame": {
+						"x": 207,
+						"y": 1,
+						"w": 34,
+						"h": 37
+					}
+				},
+				{
+					"filename": "space-marine-run-8.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 12,
+						"w": 35,
+						"h": 34
+					},
+					"frame": {
+						"x": 243,
+						"y": 1,
+						"w": 35,
+						"h": 34
+					}
+				},
+				{
+					"filename": "space-marine-run-9.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 12,
+						"w": 35,
+						"h": 34
+					},
+					"frame": {
+						"x": 280,
+						"y": 1,
+						"w": 35,
+						"h": 34
+					}
+				},
+				{
+					"filename": "space-marine-run-3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 12,
+						"w": 34,
+						"h": 34
+					},
+					"frame": {
+						"x": 317,
+						"y": 1,
+						"w": 34,
+						"h": 34
+					}
+				},
+				{
+					"filename": "space-marine-run-4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 12,
+						"w": 32,
+						"h": 34
+					},
+					"frame": {
+						"x": 353,
+						"y": 1,
+						"w": 32,
+						"h": 34
+					}
+				},
+				{
+					"filename": "space-marine-run-10.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 11,
+						"w": 36,
+						"h": 33
+					},
+					"frame": {
+						"x": 387,
+						"y": 1,
+						"w": 36,
+						"h": 33
+					}
+				},
+				{
+					"filename": "space-marine-run-2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 13,
+						"w": 35,
+						"h": 33
+					},
+					"frame": {
+						"x": 425,
+						"y": 1,
+						"w": 35,
+						"h": 33
+					}
+				},
+				{
+					"filename": "space-marine-run-7.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 13,
+						"w": 34,
+						"h": 33
+					},
+					"frame": {
+						"x": 462,
+						"y": 1,
+						"w": 34,
+						"h": 33
+					}
+				},
+				{
+					"filename": "space-marine-run-5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 11,
+						"w": 32,
+						"h": 33
+					},
+					"frame": {
+						"x": 498,
+						"y": 1,
+						"w": 32,
+						"h": 33
+					}
+				},
+				{
+					"filename": "space-marine-jump-1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 36,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 0,
+						"w": 30,
+						"h": 33
+					},
+					"frame": {
+						"x": 532,
+						"y": 1,
+						"w": 30,
+						"h": 33
+					}
+				},
+				{
+					"filename": "space-marine-jump-0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 36,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 1,
+						"w": 34,
+						"h": 32
+					},
+					"frame": {
+						"x": 564,
+						"y": 1,
+						"w": 34,
+						"h": 32
+					}
+				},
+				{
+					"filename": "bullet-0.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 9,
+						"h": 4
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 9,
+						"h": 4
+					},
+					"frame": {
+						"x": 564,
+						"y": 35,
+						"w": 9,
+						"h": 4
+					}
+				},
+				{
+					"filename": "bullet-1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 9,
+						"h": 4
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 9,
+						"h": 4
+					},
+					"frame": {
+						"x": 575,
+						"y": 35,
+						"w": 9,
+						"h": 4
+					}
+				},
+				{
+					"filename": "space-marine-jump-3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 36,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 0,
+						"w": 30,
+						"h": 31
+					},
+					"frame": {
+						"x": 600,
+						"y": 1,
+						"w": 30,
+						"h": 31
+					}
+				},
+				{
+					"filename": "space-marine-run-1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 11,
+						"w": 36,
+						"h": 30
+					},
+					"frame": {
+						"x": 632,
+						"y": 1,
+						"w": 36,
+						"h": 30
+					}
+				},
+				{
+					"filename": "space-marine-run-6.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 11,
+						"w": 32,
+						"h": 30
+					},
+					"frame": {
+						"x": 670,
+						"y": 1,
+						"w": 32,
+						"h": 30
+					}
+				},
+				{
+					"filename": "space-marine-jump-4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 36,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 2,
+						"w": 30,
+						"h": 30
+					},
+					"frame": {
+						"x": 704,
+						"y": 1,
+						"w": 30,
+						"h": 30
+					}
+				},
+				{
+					"filename": "space-marine-jump-2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 36,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 0,
+						"w": 30,
+						"h": 28
+					},
+					"frame": {
+						"x": 736,
+						"y": 1,
+						"w": 30,
+						"h": 28
+					}
+				},
+				{
+					"filename": "space-marine-jump-5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 36,
+						"h": 33
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 9,
+						"w": 32,
+						"h": 24
+					},
+					"frame": {
+						"x": 768,
+						"y": 1,
+						"w": 32,
+						"h": 24
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:f8908671f7d61f8257933d292311fd55:707d2794ada38c6d8b8158635f339e8a:db95ccf43819d4649689cd068ca5c53d$"
+	}
+}
