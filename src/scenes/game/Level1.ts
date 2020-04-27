@@ -48,11 +48,11 @@ export default class Level1 extends Scene {
 
     console.log(extractedTiles);
     //Set the names of the layers in the json file.
-    
+
     //Since backgrounds are usually dynamic, this layer is created separately. 
-    
+
     //This needs some hardcore refactoring
-    const layerNames = ["Ground", "Base", "Conduits", "GroundDecoration", "BaseRoof", "BaseDecoration" ];
+    const layerNames = ["Ground", "Base", "Conduits", "GroundDecoration", "BaseRoof", "BaseDecoration"];
     layerNames.forEach((layerName: string) => {
       console.log(layerName);
       if (layerName === "Ground" || layerName === "BaseRoof") { //Layernames that need collisions
@@ -60,9 +60,9 @@ export default class Level1 extends Scene {
         let colLayer = map.createStaticLayer(layerName, extractedTiles[layerName === "BaseRoof" ? 1 : 0], 0, 0).setCollisionByExclusion([-1]);
         //Put the layers requiring collision into the outer array so the player can access it.
         this.collisionLayers.push(colLayer);
-      } else if (layerName === "Base" || layerName === "Conduits" || layerName === "BaseDecoration"){
+      } else if (layerName === "Base" || layerName === "Conduits" || layerName === "BaseDecoration") {
         map.createStaticLayer(layerName, extractedTiles[1], 0, 0);
-      }else {
+      } else {
         map.createStaticLayer(layerName, extractedTiles[0], 0, 0);
 
       }
@@ -112,7 +112,7 @@ export default class Level1 extends Scene {
   }
 
   public update() {
-    this.spawner.update();
+    // this.spawner.update();
     if (this.player1.alive) {
       this.player1.update(this.keys);
     }
