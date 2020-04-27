@@ -22,6 +22,9 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     this.setVelocity(0, 0);
 
     this.ammo = 30;
+
+
+    let ammoText = scene.add.text(16, 16, 'Ammo: ' + this.ammo, { fontSize: '32px', fill: '#000' });
   }
   private direction: number;
   private facingRight = false;
@@ -37,45 +40,47 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     //TODO: Place into another file for reuse?
     //This will go to the helper function
     let playerAnims = [
-			{
+      {
         frameName: "space-marine-idle", //Name of the frame within the atlas file
         frameNameOverride: "idle", //What you would like to name the frame to be used in anims.play();
-				start: 0, //Starting frame
-				end: 3, //Ending frame
-				frameRate: 15, //How fast the animation runs
-				repeat: -1 //Whether or not it repeats. (-1 means "infinitely")
-			},{
+        start: 0, //Starting frame
+        end: 3, //Ending frame
+        frameRate: 15, //How fast the animation runs
+        repeat: -1 //Whether or not it repeats. (-1 means "infinitely")
+      }, {
         frameName: "space-marine-run",
         frameNameOverride: "run",
-				start: 0,
-				end: 3,
-				frameRate: 15,
-				repeat: -1
-      },{
+        start: 0,
+        end: 3,
+        frameRate: 15,
+        repeat: -1
+      }, {
         frameName: "space-marine-jump",
         frameNameOverride: "jump",
-				start: 0,
-				end: 5,
-				frameRate: 15,
-				repeat: 0
-      },{
+        start: 0,
+        end: 5,
+        frameRate: 15,
+        repeat: 0
+      }, {
         frameName: "space-marine-shoot",
         frameNameOverride: "shoot",
-				start: 0,
-				end: 1,
-				frameRate: 15,
-				repeat: -1
-      },{
+        start: 0,
+        end: 1,
+        frameRate: 15,
+        repeat: -1
+      }, {
         frameName: "bullet",
         frameNameOverride: "bullet",
-				start: 0,
-				end: 1,
-				frameRate: 2,
-				repeat: -1
+        start: 0,
+        end: 1,
+        frameRate: 2,
+        repeat: -1
       }
-		];
-    
+    ];
+
     Helpers().generateAnimations(playerAnims, this.scene, this.texture.key);
+    this.body.setSize(100, 200);
+    // this.body.setOffset(100, 2);
   }
   flyBack() {
     this.hp--;
@@ -87,7 +92,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
       this.knockback = true;
     }
   }
-  
+
   update(keys: any) {
     this.bulletTimer++;
     if (this.hp <= 0) {
@@ -96,9 +101,31 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     }
     if (this.alive && !this.knockback) {
       //Auto-resize the character-box.
-      this.body.height = this.frame.cutHeight * 2;
-      this.body.width = this.frame.cutWidth * 2;
-      this.body.setOffset(this.frame.centerX, this.frame.centerY);
+      // this.body.height = this.frame.cutHeight * 3;
+      // this.body.width = this.frame.cutWidth * 3;
+
+      //this.body.setOffset(this.frame.centerX, this.frame.centerY);
+      let yOffset = 10;
+      if (this.anims.getCurrentKey() === 'jump') {
+        this.body.width = 50;
+        this.body.height = 50;
+        if (this.facingRight) {
+          this.body.setOffset(0, yOffset);
+        }
+        else {
+          this.body.setOffset(10, yOffset);
+        }
+      }
+      else {
+        this.body.width = 50;
+        this.body.height = 80;
+        if (this.facingRight) {
+          this.body.setOffset(0, yOffset);
+        }
+        else {
+          this.body.setOffset(20, yOffset);
+        }
+      }
 
       //movement/jumping
       this.direction = (keys.D.isDown - keys.A.isDown);
@@ -128,7 +155,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
       if (this.body.velocity.y < 0 && !this.body.blocked.down) {
         this.anims.play("jump", true);
       }
-      
+
       if (keys.E.isDown && this.bulletTimer > 5 && this.ammo > 0) {
         this.bulletTimer = 0;
         this.ammo--;
