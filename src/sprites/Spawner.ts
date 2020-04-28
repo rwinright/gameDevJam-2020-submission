@@ -1,12 +1,13 @@
 import Walker from "./Walker";
 import Enemy from "./Enemy";
+import Jumper from "./Jumper";
 
 export default class Spawner extends Phaser.Physics.Arcade.Sprite {
     spawnTimer: number = 0;
     spawnTimerMax: number = 100;
     public spawn: boolean = false;
     public EnemyGroup: any;
-    constructor(scene: any, x: number, y: number, texture: any) {
+    constructor(scene: any, x: number, y: number, texture: any, EnemyGroup: any) {
         super(scene, x, y, texture);
         scene.add.existing(this);
         scene.physics.add.existing(this);
@@ -16,10 +17,11 @@ export default class Spawner extends Phaser.Physics.Arcade.Sprite {
         this.setCollideWorldBounds(false);
 
         this.setVelocity(0, 0);
-        this.EnemyGroup = this.scene.physics.add.group({
-            key: "enemies",
-            runChildUpdate: true
-        });
+        this.EnemyGroup = EnemyGroup;
+        // this.EnemyGroup = this.scene.physics.add.group({
+        //     key: "enemies",
+        //     runChildUpdate: true
+        // });
     }
     update() {
         this.spawnTimer++;
@@ -35,7 +37,7 @@ export default class Spawner extends Phaser.Physics.Arcade.Sprite {
     makeEnemy() {
         if (this.spawn) {
             this.spawn = false;
-            let e = new Walker(this.scene, this.x, this.y, "player1");
+            let e = new Jumper(this.scene, this.x, this.y, "player1", this.EnemyGroup);
             this.EnemyGroup.add(e);
 
         }

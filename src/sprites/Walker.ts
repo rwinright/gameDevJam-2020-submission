@@ -8,8 +8,8 @@ export default class Walker extends Enemy {
     speed: number = 250;
     public maxFallSpeed: number = 1000;
 
-    constructor(scene: any, x: number, y: number, texture: any) {
-        super(scene, x, y, texture);
+    constructor(scene: any, x: number, y: number, texture: any, EnemyGroup: any) {
+        super(scene, x, y, texture, EnemyGroup);
     }
 
     update() {

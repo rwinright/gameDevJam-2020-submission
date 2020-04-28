@@ -25,3 +25,9 @@ export default function Helpers() {
     generateAnimations
   })
 }
+
+
+export function GetRandom(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+

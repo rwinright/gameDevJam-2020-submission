@@ -11,19 +11,26 @@ import Jumper from '../../sprites/Jumper';
 import Spawner from '../../sprites/spawner';
 
 export default class Level1 extends Scene {
-  constructor() {
-    super({ key: CST.SCENES.GAME.LEVEL1 })
-  }
+
   private keys: any;
   public player1: Player;
   //will update to make this an array just want to get a single one working first
   public enemy1: Enemy;
   public Enemies: Enemy[] = [];
   public spawner: Spawner;
+  public EnemyGroup: any;
+
   private collisionLayers: any = [];
+  constructor() {
+    super({ key: CST.SCENES.GAME.LEVEL1 });
+  }
 
   init(data: any) {
     console.log(data.play);
+    this.EnemyGroup = this.physics.add.group({
+      key: "enemies",
+      runChildUpdate: true
+    });
   }
 
   public create() {
@@ -67,11 +74,14 @@ export default class Level1 extends Scene {
 
       }
     });
-    this.spawner = new Spawner(this, 400, 500, 'player1');
-    this.enemy1 = new Walker(this, 200, 300, 'player1');
+    this.spawner = new Spawner(this, 400, 500, 'player1', this.EnemyGroup);
+    this.enemy1 = new Walker(this, 200, 300, 'player1', this.EnemyGroup);
     this.physics.add.collider(this.enemy1, this.collisionLayers);
     this.physics.add.collider(this.spawner, this.collisionLayers);
+
     //Add to Enemy Array 
+    this.Enemies.push(this.enemy1);
+
 
     this.player1 = new Player(this, 400, 400, 'player1');
 
@@ -86,11 +96,11 @@ export default class Level1 extends Scene {
     //this.physics.add.collider(this.player1, this.Enemies);
     this.physics.add.collider(
       this.player1,
-      this.spawner.EnemyGroup,
+      this.EnemyGroup,
       this.collideWEnemy);
 
     this.physics.add.collider(
-      this.spawner.EnemyGroup,
+      this.EnemyGroup,
       this.player1.bulletGroup,
       this.collideWBullet
     )
@@ -99,6 +109,10 @@ export default class Level1 extends Scene {
       .startFollow(this.player1, false, 0.1, 0.5, 0, 0)
       .setBounds(0, 0, map.widthInPixels, map.heightInPixels); //Follow the player
 
+    for (let i = 0; i < this.Enemies.length; i++) {
+      let e = this.Enemies[i];
+      this.EnemyGroup.add(e);
+    }
   }
   public collideWBullet(e: Enemy, b: any) {
     b.disableBody(true, true);
@@ -112,15 +126,15 @@ export default class Level1 extends Scene {
   }
 
   public update() {
-    // this.spawner.update();
+    this.spawner.update();
     if (this.player1.alive) {
       this.player1.update(this.keys);
     }
     //this.enemy1.update();
-    for (let i = 0; i < this.Enemies.length; i++) {
-      let e = this.Enemies[i];
-      e.update();
-    }
+    // for (let i = 0; i < this.Enemies.length; i++) {
+    //   let e = this.Enemies[i];
+    //   e.update();
+    // }
 
   }
 }

@@ -3,8 +3,8 @@ import Walker from "./Walker";
 export default class Flyer extends Walker {
     moveUp: boolean = true;
     facingUp: boolean = true;
-    constructor(scene: any, x: number, y: number, texture: any) {
-        super(scene, x, y, texture);
+    constructor(scene: any, x: number, y: number, texture: any, EnemyGroup: any) {
+        super(scene, x, y, texture, EnemyGroup);
         this.maxFallSpeed = 0;
         this.maxWalktime = 1000;
     }

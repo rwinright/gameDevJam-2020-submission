@@ -7,6 +7,8 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
   knockback: boolean = false;
   knockbackTimer: number = 0;
   public hp: number = 10;
+  ammoText: any;
+  healthText: any;
 
   constructor(scene: any, x: number, y: number, texture: any) {
     super(scene, x, y, texture);
@@ -21,10 +23,11 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.setVelocity(0, 0);
 
-    this.ammo = 30;
+    this.ammo = 160;
 
 
-    let ammoText = scene.add.text(16, 16, 'Ammo: ' + this.ammo, { fontSize: '32px', fill: '#000' });
+    this.ammoText = scene.add.text(16, 16, 'Ammo: ' + this.ammo, { fontSize: '32px', fill: '#FFFFFF' });
+    this.healthText = scene.add.text(16, 48, "Health: " + this.hp, { fontSize: '32px', fill: '#FFFFFF' });
   }
   private direction: number;
   private facingRight = false;
@@ -95,6 +98,8 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
   update(keys: any) {
     this.bulletTimer++;
+    this.ammoText.setText("Ammo " + this.ammo);
+    this.healthText.setText("Health: " + this.hp);
     if (this.hp <= 0) {
       this.alive = false;
       this.disableBody(true, true);
